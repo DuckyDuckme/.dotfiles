@@ -1,0 +1,13 @@
+# This file controls the behaviour of line input editing for
+# programs that use the GNU Readline library.
+
+# Do reverse search when partial command is included
+# rather than cycle through history
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\e[C": forward-char
+"\e[D": backward-char
+
+set completion-ignore-case on
+set bell-style visible
+
