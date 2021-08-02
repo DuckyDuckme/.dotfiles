@@ -7,7 +7,7 @@
 
 # Export some env variables for me
 export EDITOR=/bin/vim
-export PATH=$HOME:/opt:$HOME/.cargo/bin/:$PATH
+export PATH=$HOME:/opt:$PATH
 export VISUAL=/bin/vim
 export HISTCONTROL=ignoredups:erasedups
 export BROWSER=/usr/bin/firefox
@@ -28,8 +28,8 @@ alias ..='cd ..'
 alias diskspace="du -S | sort -n -r | more"
 alias grep="grep --color=auto"
 alias samba="ssh k.pudowski@samba.fmf.nl"
-alias qemu="qemu-system-x86_64"
 alias rm="rm -I" # this shit is dangerous
+alias shut="shutdown now"
 
 # Set the prompt
 PS1='\e[1;32m$? \u@\h \W \$\e[m '
@@ -71,12 +71,3 @@ extract () {
          echo "'$1' is not a valid file"
      fi
 }
-
-# Make cp copy to the current directory
-# Doesn't work lol
-# if [ $0 = "cp" ]
-# then
-#     echo $0
-# fi
-
-alias shut="shutdown now"
