@@ -1,5 +1,6 @@
 " display line numbers on the left
 set number
+set relativenumber
 set smartcase
 set ignorecase
 set shiftwidth=4
