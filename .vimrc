@@ -22,6 +22,11 @@ set hlsearch
 " return to last edit position when opening files
 au BufReadPost * if line("'\"") > 1 & line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
+" :W to write with root permissions
+command! W execute 'w !doas tee % > /dev/null' <bar> edit!
+" or for sudo
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+
 syntax enable
 
 " enable use of mouse for all modes
