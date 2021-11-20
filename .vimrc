@@ -34,8 +34,8 @@ if has('mouse')
     set mouse=a
 endif
 
-" maps 'jk' to escape
-inoremap jk <Esc>
+" maps 'kj' to escape
+inoremap kj <Esc>
 
 " map 0 to first non-blank character
 map 0 ^
