@@ -41,7 +41,6 @@ map 0 ^
 call plug#begin()
 
 " sth the Rust website recommended me
-syntax enable
 filetype plugin indent on
 
 " rust lang support
@@ -56,3 +55,6 @@ call plug#end()
 
 set background=dark
 colorscheme gruvbox
+
+" that's to set the pdf viewer of latex to zathura
+let g:vimtex_view_method=‘zathura’
