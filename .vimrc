@@ -57,4 +57,4 @@ set background=dark
 colorscheme gruvbox
 
 " that's to set the pdf viewer of latex to zathura
-let g:vimtex_view_method=‘zathura’
+"let g:vimtex_view_method=‘zathura’
