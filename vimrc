@@ -54,6 +54,8 @@ Plug 'lervag/vimtex'
 call plug#end()
 
 set background=dark
+let g:gruvbox_transparent_bg = 1 " to make background transparent
+autocmd VimEnter * hi Normal ctermbg=none
 colorscheme gruvbox
 
 " that's to set the pdf viewer of latex to zathura
