@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# A small script to setup my dotfiles from github
+# A small script to setup my dotfiles from github based on M. Seri's bootstrapping script
 
 install () {
     if [ ! -d $(dirname $2) ]; then

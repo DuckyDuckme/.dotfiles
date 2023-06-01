@@ -8,6 +8,8 @@
 [color]
 	ui = true
 	status = auto
+[branch]
+    	autosetuprebase = always
 [github]
 	user = DuckyDuckme
 [alias]
