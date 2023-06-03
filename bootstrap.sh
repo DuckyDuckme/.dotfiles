@@ -23,8 +23,6 @@ if [ "$PWD" != "$HOME/.dotfiles" ]; then
     exit 1
 fi
 
-set -ex
-
 git pull
 
 install "$HOME/.dotfiles/gitconfig" "$HOME/.gitconfig"
