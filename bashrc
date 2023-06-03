@@ -6,9 +6,9 @@
 [[ $- != *i* ]] && return
 
 # Export some env variables for me
-export EDITOR=/bin/vim
+export EDITOR=/bin/nvim
 export PATH=$HOME:/opt:$PATH
-export VISUAL=/bin/vim
+export VISUAL=/bin/nvim
 export HISTCONTROL=ignoredups:erasedups
 export BROWSER=/usr/bin/firefox
 export HISTIGNORE="pwd:ls:la:ll:cd:.."
@@ -28,6 +28,7 @@ alias ..='cd ..'
 alias diskspace="du -S | sort -n -r | more"
 alias grep="grep --color=auto"
 alias shut="shutdown now"
+alias vim='nvim'
 
 # Set the prompt
 PS1='\e[1;32m$? \u@\h \W \$\e[m '

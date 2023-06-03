@@ -2,31 +2,44 @@
 #
 # A small script to setup my dotfiles from github based on M. Seri's bootstrapping script
 
-install () {
-    if [ ! -d $(dirname $2) ]; then
-        echo "Skipping $2: destination directory does not exist"
-        return
-    fi
-
-    if [ -e $2 -a ! -h $2 ]; then
-        echo "Skipping $2: installing would overwrite non-symlink"
-        return
-    fi
-
+link() {
     echo -n "Linking $2..."
     ln -sf $1 $2
     echo "done"
 }
 
-if [ "$PWD" != "$HOME/.dotfiles" ]; then
-    echo "Please execute bootstap.sh from .dotfiles directory in $HOME"
-    exit 1
-fi
+copy() {
+    echo -n "Copying $2..."
+    cp -f $1 $2
+    echo "done"
+}
 
-git pull
+    
+install() {
+    $1 "$HOME/.dotfiles/gitconfig" "$HOME/.gitconfig"
+    $1 "$HOME/.dotfiles/bashrc" "$HOME/.bashrc"
+    $1 "$HOME/.dotfiles/inputrc" "$HOME/.inputrc"
+    $1 "$HOME/.dotfiles/vimrc" "$HOME/.vimrc"
+    $1 "$HOME/.dotfiles/xinitrc" "$HOME/.xinitrc"
+}
 
-install "$HOME/.dotfiles/gitconfig" "$HOME/.gitconfig"
-install "$HOME/.dotfiles/bashrc" "$HOME/.bashrc"
-install "$HOME/.dotfiles/inputrc" "$HOME/.inputrc"
-install "$HOME/.dotfiles/vimrc" "$HOME/.vimrc"
-install "$HOME/.dotfiles/xinitrc" "$HOME/.xinitrc"
+
+
+print_usage() {
+    echo -e "USAGE:\n./bootstrap.sh [OPTIONS] are either:\n\n\
+    -l, --link\t Link the files from this repository to their destination.\n\
+    -c, --copy\t Copy the files to their destination (default)"
+}
+
+run() {
+    if [[ $1 == "-l" || $1 == "--link" ]]; then
+	install link
+    elif [[ -z $1 || $1 == "-c" || $1 == "--copy" ]]; then
+	install copy
+    else
+	print_usage
+	exit 1
+    fi
+}
+
+run $1

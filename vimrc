@@ -1,8 +1,8 @@
 " display line numbers on the left
 set number
 set relativenumber
-set smartcase
 set ignorecase
+set smartcase
 set shiftwidth=4
 set ruler
 set encoding=utf8
@@ -33,6 +33,9 @@ endif
 
 " maps 'kj' to escape
 inoremap kj <Esc>
+
+" maps <tab> to clear the search pattern
+map <tab> :noh<cr>
 
 " map 0 to first non-blank character
 map 0 ^
