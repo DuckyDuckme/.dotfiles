@@ -21,4 +21,4 @@
     	ckb = checkout -b
 	br = branch
 	cs = commit -s
-    	csa = commit -as
+	ca = commit -a
