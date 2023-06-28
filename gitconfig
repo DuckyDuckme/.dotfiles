@@ -1,6 +1,8 @@
 [user]
 	name = Krzysztof Jan Pudowski
 	email = krzysiek.pudowski@gmail.com
+[init]
+	defaultBranch = main
 [push]
 	default = matching
 [pull]
