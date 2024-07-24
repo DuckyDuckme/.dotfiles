@@ -1,0 +1,24 @@
+[user]
+	name = Krzysztof Jan Pudowski
+	email = krzysiek.pudowski@gmail.com
+[push]
+	default = matching
+[pull]
+	rebase = false
+[color]
+	ui = true
+	status = auto
+[branch]
+    	autosetuprebase = always
+[github]
+	user = DuckyDuckme
+[alias]
+	st = status -sb
+	co = checkout
+	gl = log --graph --abbrev-commit --oneline --decorate
+    	gr = log --oneline --graph --decorate --branches --remotes --abbrev-commit
+    	chg = log --oneline --no-merges
+    	ckb = checkout -b
+	br = branch
+	cs = commit -s
+	ca = commit -a

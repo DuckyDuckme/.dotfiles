@@ -16,6 +16,7 @@ copy() {
 
     
 install() {
+    $1 "$HOME/.dotfiles/gitconfig" "$HOME/.gitconfig"
     $1 "$HOME/.dotfiles/bashrc" "$HOME/.bashrc"
     $1 "$HOME/.dotfiles/inputrc" "$HOME/.inputrc"
     $1 "$HOME/.dotfiles/vimrc" "$HOME/.vimrc"
