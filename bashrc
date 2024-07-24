@@ -20,7 +20,7 @@ export HISTFILESIZE=1000000
 # eval `dircolors -b ~/.dir_colors`
 
 # Source the aliases
-if [ -f ~/.aliases ]; then
+if [ -f ~/.config/.aliases ]; then
     . ~/.config/.aliases
 fi
 
