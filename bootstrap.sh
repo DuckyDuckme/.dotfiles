@@ -3,13 +3,13 @@
 # A small script to setup my dotfiles from github based on M. Seri's bootstrapping script
 
 link() {
-    echo -n "Linking $2... "
+    echo -n "Linking $1... "
     ln -sf $1 $2
     echo "done"
 }
 
 copy() {
-    echo -n "Copying $2... "
+    echo -n "Copying $1... "
     cp -fr $1 $2
     echo "done"
 }
@@ -23,10 +23,6 @@ install() {
     $1 "$HOME/.dotfiles/zshrc" "$HOME/.zshrc"
 
     $1 "$HOME/.dotfiles/.config" "$HOME"
-
-    if [ ! -d "$HOME/.powerlevel10k" ]; then
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
-    fi
 }
 
 print_usage() {
