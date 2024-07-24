@@ -10,7 +10,7 @@ link() {
 
 copy() {
     echo -n "Copying $2..."
-    cp -f $1 $2
+    cp -fr $1 $2
     echo "done"
 }
 
@@ -21,6 +21,10 @@ install() {
     $1 "$HOME/.dotfiles/inputrc" "$HOME/.inputrc"
     $1 "$HOME/.dotfiles/vimrc" "$HOME/.vimrc"
     $1 "$HOME/.dotfiles/xinitrc" "$HOME/.xinitrc"
+    $1 "$HOME/.dotfiles/zshrc" "$HOME/.zshrc"
+
+    $1 "$HOME/.dotfiles/.config" "$HOME"
+
 }
 
 
@@ -35,6 +39,7 @@ run() {
     if [[ $1 == "-l" || $1 == "--link" ]]; then
 	install link
     elif [[ -z $1 || $1 == "-c" || $1 == "--copy" ]]; then
+	# default
 	install copy
     else
 	print_usage
