@@ -13,6 +13,7 @@ copy() {
     cp -fr $1 $2
     echo "done"
 }
+
     
 install() {
     $1 "$HOME/.dotfiles/bashrc" "$HOME/.bashrc"
@@ -24,6 +25,8 @@ install() {
     $1 "$HOME/.dotfiles/.config" "$HOME"
 
 }
+
+
 
 print_usage() {
     echo -e "USAGE:\n./bootstrap.sh [OPTIONS] are either:\n\n\
