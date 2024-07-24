@@ -21,7 +21,7 @@ export HISTFILESIZE=1000000
 
 # Source the aliases
 if [ -f ~/.aliases ]; then
-    . ~/.aliases
+    . ~/.config/.aliases
 fi
 
 # Set the prompt
