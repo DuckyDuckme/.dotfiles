@@ -13,7 +13,6 @@ copy() {
     cp -fr $1 $2
     echo "done"
 }
-
     
 install() {
     $1 "$HOME/.dotfiles/gitconfig" "$HOME/.gitconfig"
@@ -25,9 +24,13 @@ install() {
 
     $1 "$HOME/.dotfiles/.config" "$HOME"
 
+    if [ ! -d "$HOME/.powerlevel10k" ]; then
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
+    fi
+
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 }
-
-
 
 print_usage() {
     echo -e "USAGE:\n./bootstrap.sh [OPTIONS] are either:\n\n\
