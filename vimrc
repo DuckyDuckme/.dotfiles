@@ -41,11 +41,11 @@ map <tab> :noh<cr>
 map 0 ^
 
 " this automates installation of vim-plug
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+" let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+" if empty(glob(data_dir . '/autoload/plug.vim'))
+  " silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  " autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+" endif
 
 " start the vim.plug config
 call plug#begin()
@@ -54,7 +54,7 @@ call plug#begin()
 filetype plugin indent on
 
 " rust lang support
-Plug 'rust-lang/rust.vim'
+" Plug 'rust-lang/rust.vim'
 
 " gruvbox theme
 Plug 'morhetz/gruvbox'
