@@ -18,28 +18,30 @@ vim.api.nvim_set_keymap('i', 'kj', '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<tab>', ':noh<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '0', '^', { noremap = true, silent = true })
 
--- for vim plug local vim = vim
-local Plug = vim.fn['plug#']
+if vim.fn.empty(vim.fn.globalpath(vim.o.runtimepath, 'autoload/plug.vim')) == 0 then
+    -- for vim plug local vim = vim
+    local Plug = vim.fn['plug#']
 
-vim.call('plug#begin')
+    vim.call('plug#begin')
 
--- themes
-Plug('morhetz/gruvbox')
-Plug('catppuccin/nvim')
-Plug('folke/tokyonight.nvim')
-Plug('EdenEast/nightfox.nvim')
-Plug('mhartington/oceanic-next')
-Plug('arzg/vim-colors-xcode')
--- tex support
-Plug('lervag/vimtex')
--- for commenting out
-Plug('preservim/nerdcommenter')
--- for code completion
-Plug('neoclide/coc.nvim')
--- linting
-Plug('dense-analysis/ale')
+    -- themes
+    Plug('morhetz/gruvbox')
+    Plug('catppuccin/nvim')
+    Plug('folke/tokyonight.nvim')
+    Plug('EdenEast/nightfox.nvim')
+    Plug('mhartington/oceanic-next')
+    Plug('arzg/vim-colors-xcode')
+    -- tex support
+    Plug('lervag/vimtex')
+    -- for commenting out
+    Plug('preservim/nerdcommenter')
+    -- for code completion
+    Plug('neoclide/coc.nvim')
+    -- linting
+    Plug('dense-analysis/ale')
 
-vim.call('plug#end')	
+    vim.call('plug#end')	
+end
 
 --vim.cmd('silent! colorscheme OceanicNext')
 vim.cmd('silent! colorscheme tokyonight')
