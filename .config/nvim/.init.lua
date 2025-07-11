@@ -12,19 +12,38 @@ vim.opt.mouse = 'a'
 vim.opt.cursorline = true
 vim.opt.ttyfast = true
 vim.opt.clipboard = 'unnamedplus'
-vim.opt.scrolloff = 7  -- 'so' option (scroll offset)
+vim.opt.scrolloff = 8  -- 'so' option (scroll offset)
+
+-- maps the (local)leader (usually the backslash \) to be just the spacebar
+vim.g.maplocalleader = ' '
+vim.g.mapleader = ' '
 
 vim.api.nvim_set_keymap('i', 'kj', '<Esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<tab>', ':noh<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '0', '^', { noremap = true, silent = true })
 
-if vim.fn.empty(vim.fn.globalpath(vim.o.runtimepath, 'autoload/plug.vim')) == 0 then
+-- associate .sage files with .py
+vim.api.nvim_command('autocmd BufRead,BufNewFile *.sage set filetype=python')
+
+---- a little sth from stackoverflow to open the file at last position --
+vim.api.nvim_create_autocmd("BufReadPost", {
+    pattern = {"*"},
+    callback = function()
+        if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
+            vim.api.nvim_exec("normal! g'\"",false)
+        end
+    end
+})
+
+
+--if vim.fn.empty(vim.fn.globalpath(vim.o.runtimepath, 'autoload/plug.vim')) == 0 then
     -- for vim plug local vim = vim
     local Plug = vim.fn['plug#']
 
     vim.call('plug#begin')
 
     -- themes
+    Plug('catppuccin/nvim')
     Plug('morhetz/gruvbox')
     Plug('catppuccin/nvim')
     Plug('folke/tokyonight.nvim')
@@ -34,17 +53,25 @@ if vim.fn.empty(vim.fn.globalpath(vim.o.runtimepath, 'autoload/plug.vim')) == 0 
     -- tex support
     Plug('lervag/vimtex')
     -- for commenting out
-    Plug('preservim/nerdcommenter')
+    --Plug('preservim/nerdcommenter')
     -- for code completion
-    Plug('neoclide/coc.nvim')
+    Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
     -- linting
-    Plug('dense-analysis/ale')
+    --Plug('dense-analysis/ale')
+
+    -- telescope
+    -- plenary is a dependency of telescope
+    Plug('nvim-lua/plenary.nvim')
+    Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.8' })
+    -- optional deps of telescope
+    --Plug('nvim-treesitter/nvim-treesitter')
+    Plug('nvim-tree/nvim-web-devicons')
 
     vim.call('plug#end')	
-end
+--end
 
 --vim.cmd('silent! colorscheme OceanicNext')
-vim.cmd('silent! colorscheme tokyonight')
+vim.cmd('silent! colorscheme catppuccin')
 vim.g.termguicolors=true
 
 
@@ -56,12 +83,18 @@ vim.api.nvim_set_hl(0, "EndOfBuffer", {})
 
 
 ----------- vimtex config ----------
---vim.g.vimtex_view_method = 'zathura'
-vim.g.vimtex_view_general_viewer = 'okular'
+vim.g.vimtex_view_general_viewer = 'evince'
 --vim.g.vimtex_view_general_options = [[--synctex-forward @line:@col:@file]]
-vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
+--vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
 vim.g.tex_flavor = "latex"
 
+-- for ignored warnings
+vim.g.vimtex_quickfix_ignore_filters = {
+    'Overfull', 'Underfull'
+}
+-------- end of vimtex config -------
+
+    
 ------------- coc config ----------------
 -- i found this at coc github
 vim.api.nvim_command('autocmd FileType json syntax match Comment +//.*$+')
@@ -88,4 +121,9 @@ keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 -- <C-g>u breaks current undo, please make your own choice
 keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
 
------------ end of coc config ---------
+
+----------- telescope config ----------
+require("telescope").setup()
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+
