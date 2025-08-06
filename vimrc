@@ -47,26 +47,29 @@ map 0 ^
   " autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 " endif
 
-" start the vim.plug config
-call plug#begin()
+" if it is installed
+if ! empty(globpath(&rtp, 'autoload/plug.vim'))
+    " start the vim.plug config
+    call plug#begin()
 
-" sth the Rust website recommended me
-filetype plugin indent on
+    " sth the Rust website recommended me
+    filetype plugin indent on
 
-" rust lang support
-" Plug 'rust-lang/rust.vim'
+    " rust lang support
+    " Plug 'rust-lang/rust.vim'
 
-" gruvbox theme
-Plug 'morhetz/gruvbox'
+    " gruvbox theme
+    Plug 'morhetz/gruvbox'
 
-" tex support
-Plug 'lervag/vimtex'
-call plug#end()
+    " tex support
+    Plug 'lervag/vimtex'
+    call plug#end()
+endif
 
 set background=dark
 let g:gruvbox_transparent_bg = 1 " to make background transparent
 autocmd VimEnter * hi Normal ctermbg=none
-colorscheme gruvbox
+silent! colorscheme gruvbox
 
 " that's to set the pdf viewer of latex to zathura
 "let g:vimtex_view_method=‘zathura’
