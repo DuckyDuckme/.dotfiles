@@ -11,7 +11,12 @@ HISTSIZE=10000
 SAVEHIST=1000
 setopt autocd extendedglob notify
 unsetopt beep
+
+# For vi insert mode
 bindkey -v
+bindkey '^R' history-incremental-search-backward
+
+bindkey kj vi-cmd-mode
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/ducky/.zshrc'
@@ -21,9 +26,11 @@ compinit
 # End of lines added by compinstall
 
 # Add aliases
-source $HOME/.aliases
+source $HOME/.config/.aliases
 
-zstyle ':completion:*' menu select
+#zstyle ':completion:*' menu select
+# Only complete .tex files for the `nvim` command
+zstyle ':completion:*:*:nvim:*' file-patterns '*.tex:tex-files' '%p:all-files'
 
 # https://aur.archlinux.org/zsh-theme-powerlevel10k-git.git
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
@@ -32,4 +39,13 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # https://github.com/zdharma-continuum/fast-syntax-highlighting
-source ~/AUR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+#source ~/AUR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+# oh-my-zsh plugins
+plugins=(
+colored-man-pages
+)
+
+# zoxide
+eval "$(zoxide init zsh)"
+export _ZO_ECHO=1
