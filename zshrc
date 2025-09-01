@@ -28,7 +28,9 @@ compinit
 # Add aliases
 source $HOME/.config/.aliases
 
-zstyle ':completion:*' menu select
+#zstyle ':completion:*' menu select
+# Only complete .tex files for the `nvim` command
+zstyle ':completion:*:*:nvim:*' file-patterns '*.tex:tex-files' '%p:all-files'
 
 # https://aur.archlinux.org/zsh-theme-powerlevel10k-git.git
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
