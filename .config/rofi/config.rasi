@@ -1,12 +1,19 @@
 configuration {
-/*	modes: "window,drun,run,ssh";*/
+	modes: "drun,run,filebrowser,ssh,calc";
 /*	font: "mono 12";*/
 /*	location: 0;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
 	show-icons: true;
-/*	terminal: "rofi-sensible-terminal";*/
+/*	preview-cmd: ;*/
+/*	on-selection-changed: ;*/
+/*	on-mode-changed: ;*/
+/*	on-entry-accepted: ;*/
+/*	on-menu-canceled: ;*/
+/*	on-menu-error: ;*/
+/*	on-screenshot-taken: ;*/
+	terminal: "alacritty";
 /*	ssh-client: "ssh";*/
 /*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
 /*	run-command: "{cmd}";*/
@@ -17,6 +24,7 @@ configuration {
 /*	icon-theme: ;*/
 /*	drun-match-fields: "name,generic,exec,categories,keywords";*/
 /*	drun-categories: ;*/
+/*	drun-exclude-categories: ;*/
 /*	drun-show-actions: false;*/
 /*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
 /*	drun-url-launcher: "xdg-open";*/
@@ -25,6 +33,7 @@ configuration {
 /*	sort: false;*/
 /*	sorting-method: "normal";*/
 /*	case-sensitive: false;*/
+/*	case-smart: false;*/
 /*	cycle: true;*/
 /*	sidebar-mode: false;*/
 /*	hover-select: false;*/
@@ -32,7 +41,7 @@ configuration {
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
-/*	combi-modes: "window,run";*/
+	//combi-modes: "drun,run,ssh,filebrowser";
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 /*	m: "-5";*/
@@ -42,6 +51,7 @@ configuration {
 /*	scroll-method: 0;*/
 /*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
+/*	global-kb: false;*/
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
 /*	combi-display-format: "{mode} {text}";*/
@@ -53,19 +63,23 @@ configuration {
 /*	normalize-match: false;*/
 /*	steal-focus: false;*/
 /*	application-fallback-icon: ;*/
-/*	refilter-timeout-limit: 8192;*/
+/*	refilter-timeout-limit: 300;*/
 /*	xserver-i300-workaround: false;*/
+/*	completer-mode: "filebrowser";*/
+/*	imdkit: true;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
 /*	display-window: ;*/
-/*	display-windowcd: ;*/
 /*	display-run: ;*/
 /*	display-ssh: ;*/
 /*	display-drun: ;*/
 /*	display-combi: ;*/
 /*	display-keys: ;*/
 /*	display-filebrowser: ;*/
+/*	display-recursivebrowser: ;*/
+/*	display-calc: ;*/
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/
 /*	kb-secondary-paste: "Control+v,Insert";*/
+/*	kb-secondary-copy: "Control+c";*/
 /*	kb-clear-line: "Control+w";*/
 /*	kb-move-front: "Control+a";*/
 /*	kb-move-end: "Control+e";*/
@@ -133,6 +147,10 @@ configuration {
 /*	kb-select-8: "Super+8";*/
 /*	kb-select-9: "Super+9";*/
 /*	kb-select-10: "Super+0";*/
+/*	kb-entry-history-up: "Control+Up";*/
+/*	kb-entry-history-down: "Control+Down";*/
+/*	kb-matcher-up: "Super+equal";*/
+/*	kb-matcher-down: "Super+minus";*/
 /*	ml-row-left: "ScrollLeft";*/
 /*	ml-row-right: "ScrollRight";*/
 /*	ml-row-up: "ScrollUp";*/
@@ -141,15 +159,21 @@ configuration {
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
   timeout {
+      delay:  15;
       action: "kb-cancel";
-      delay:  0;
   }
   filebrowser {
       directories-first: true;
       sorting-method:    "name";
-  }
+  }  
 }
+window{
+   width: 70%;
+}
+//@theme "gruvbox-dark"
 
-@theme "gruvbox-dark"
-// you need https://github.com/newmanls/rofi-themes-collection for this
-//@theme "/usr/share/rofi/themes/gruvbox-light-soft.rasi"
+//@theme "/usr/share/rofi/themes/rounded-blue-dark.rasi"
+
+//@theme "/usr/share/rofi/themes/rounded-orange-dark.rasi"
+
+@theme "/usr/share/rofi/themes/glue_pro_blue.rasi"
