@@ -7,21 +7,23 @@ SOURCE_DIR=$(realpath "$0")
 
 link() {
     echo -n "Linking $1... "
-    ln -sf $1 $2
+    ln -s $1 $2
     echo "done"
 }
 
 copy() {
     echo -n "Copying $1... "
-    cp -fr $1 $2
+    cp -r $1 $2
     echo "done"
 }
     
 install() {
     for f in /home/ducky/.dotfiles/*; do
 	name="${f##*/}"
-	if [[ -f "$f" && "$name" != "bootstrap.sh" ]]; then
-	    $1 "$name" "$HOME/.$name"
+
+	# we look for actual files and also those without an extension as these turn out to be the problematic ones
+	if [[ -f "$f" && "$name" != *.* ]]; then
+	    echo -e "$name" "$HOME/.$name"
 	fi
     done
     #$1 "$HOME/.dotfiles/gitconfig" "$HOME/.gitconfig"
@@ -31,7 +33,7 @@ install() {
     #$1 "$HOME/.dotfiles/xinitrc" "$HOME/.xinitrc"
     #$1 "$HOME/.dotfiles/zshrc" "$HOME/.zshrc"
 
-    $1 "$HOME/.dotfiles/.config" "$HOME"
+    #$1 "$HOME/.dotfiles/.config" "$HOME"
 }
 
 ask_for_interactive() {
