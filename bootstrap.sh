@@ -33,7 +33,7 @@ install() {
     #$1 "$HOME/.dotfiles/xinitrc" "$HOME/.xinitrc"
     #$1 "$HOME/.dotfiles/zshrc" "$HOME/.zshrc"
 
-    #$1 "$HOME/.dotfiles/.config" "$HOME"
+    $1 "$HOME/.dotfiles/.config" "$HOME"
 }
 
 ask_for_interactive() {
