@@ -1,17 +1,20 @@
 [user]
 	name = Krzysztof Jan Pudowski
-	email = krzysiek.pudowski@gmail.com
+	email = krzysiek.pudowski@protonmail.com
+[core]
+	editor = "nvim"
 [init]
 	defaultBranch = main
 [push]
 	default = matching
+	autoSetupRemote = true
 [pull]
-	rebase = false
+	#rebase = false
 [color]
 	ui = true
 	status = auto
 [branch]
-    	autosetuprebase = always
+	#autosetuprebase = always
 [github]
 	user = DuckyDuckme
 [alias]

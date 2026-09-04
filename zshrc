@@ -9,14 +9,14 @@ fi
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=1000
-setopt autocd extendedglob notify
+setopt autocd extendedglob notify hist_ignore_all_dups
 unsetopt beep
 
 # For vi insert mode
-bindkey -v
+#bindkey -v
 bindkey '^R' history-incremental-search-backward
 
-bindkey kj vi-cmd-mode
+#bindkey kj vi-cmd-mode
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/ducky/.zshrc'
@@ -41,11 +41,21 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # https://github.com/zdharma-continuum/fast-syntax-highlighting
 #source ~/AUR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
-# oh-my-zsh plugins
-plugins=(
-colored-man-pages
-)
-
 # zoxide
 eval "$(zoxide init zsh)"
 export _ZO_ECHO=1
+
+# add ~/scripts to path
+path+=('$HOME/scripts/')
+# add the .local/bin directory to path
+path+=('$HOME/.local/bin/')
+# add .cargo/ into the path
+path+=('$HOME/.cargo/bin/')
+export PATH
+
+#export LESS='-R -F -N -X -S -i'
+#export LESS='-F'
+export LESS='--wordwrap -i -F --use-color --mouse --wheel-lines=5 -R'
+
+# Make zsh know about hosts already accessed by SSH
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
