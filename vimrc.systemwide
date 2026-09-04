@@ -1,0 +1,33 @@
+" display line numbers on the left
+set number
+set relativenumber
+set ignorecase
+set smartcase
+set shiftwidth=4
+set ruler
+set encoding=utf8
+
+" keep the same indent as you are on
+set autoindent
+
+" set 7 lines to the cursor - when moving vertically
+set so=7
+
+" highlights the search
+set hlsearch
+
+syntax enable
+
+" enable use of mouse for all modes
+if has('mouse')
+    set mouse=a
+endif
+
+" maps 'kj' to escape
+inoremap kj <Esc>
+
+" maps <tab> to clear the search pattern
+map <tab> :noh<cr>
+
+" map 0 to first non-blank character
+map 0 ^
