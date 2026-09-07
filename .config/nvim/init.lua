@@ -62,7 +62,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     -- telescope
     -- plenary is a dependency of telescope
     Plug('nvim-lua/plenary.nvim')
-    Plug('nvim-telescope/telescope.nvim', { ['tag'] = '0.1.8' })
+    Plug('nvim-telescope/telescope.nvim', { ['tag'] = 'v0.2.*' })
     -- optional deps of telescope
     Plug('nvim-treesitter/nvim-treesitter')
     Plug('nvim-tree/nvim-web-devicons')
@@ -83,7 +83,7 @@ vim.api.nvim_set_hl(0, "EndOfBuffer", {})
 
 
 ----------- vimtex config ----------
-vim.g.vimtex_view_general_viewer = 'evince'
+vim.g.vimtex_view_general_viewer = 'okular'
 --vim.g.vimtex_view_method = 'evince'
 --vim.g.vimtex_view_general_options = [[--synctex-forward @line:@col:@file]]
 --vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
@@ -96,6 +96,9 @@ vim.g.vimtex_quickfix_ignore_filters = {
 -------- end of vimtex config -------
 
     
+---[=====[
+--begin comment block
+--
 ------------- coc config ----------------
 -- i found this at coc github
 vim.api.nvim_command('autocmd FileType json syntax match Comment +//.*$+')
@@ -122,9 +125,16 @@ keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 -- <C-g>u breaks current undo, please make your own choice
 keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
 
+--
+-- end of a comment block
+---]=====]
+
 
 ----------- telescope config ----------
 require("telescope").setup()
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>ff", builtin.find_files)
+vim.keymap.set("n", "<leader>fg", builtin.live_grep)
+vim.keymap.set("n", "<leader>fb", builtin.buffers)
+vim.keymap.set("n", "<leader>fh", builtin.help_tags)
