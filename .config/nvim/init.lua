@@ -93,6 +93,12 @@ vim.g.tex_flavor = "latex"
 vim.g.vimtex_quickfix_ignore_filters = {
     'Overfull', 'Underfull', 'hyperref'
 }
+
+-- latexmk configuration
+vim.g.vimtex_compiler_latexmk = {
+    build_dir = "",		  -- PDF in project root
+    aux_dir = "latexmk_build",    -- everything else in build/
+}
 -------- end of vimtex config -------
 
     
@@ -128,6 +134,7 @@ keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r
 --
 -- end of a comment block
 ---]=====]
+
 
 
 ----------- telescope config ----------
