@@ -23,7 +23,7 @@ install() {
 
 	# we look for actual files and also those without an extension as these turn out to be the problematic ones
 	if [[ -f "$f" && "$name" != *.* ]]; then
-	    echo -e "$name" "$HOME/.$name"
+	    $1 "$name" "$HOME/.$name"
 	fi
     done
     #$1 "$HOME/.dotfiles/gitconfig" "$HOME/.gitconfig"

@@ -1,6 +1,6 @@
 # Set some aliases
-alias reboot='doas reboot'
-alias pac='doas pacman -Syu'
+alias reboot='sudo reboot'
+alias pac='sudo pacman -Syu'
 alias ll='ls -l'
 alias la='ls -lAh'
 alias ls='ls --color=auto'
@@ -8,3 +8,11 @@ alias ..='cd ..'
 alias diskspace="du -S | sort -n -r | more"
 alias grep="grep --color=auto"
 alias shut="shutdown now"
+
+# rsync version of cp and mv copied from arch wiki
+cpr() {
+  rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
+}
+mvr() {
+  rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 --remove-source-files "$@"
+}
