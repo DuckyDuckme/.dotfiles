@@ -1,8 +1,6 @@
 [user]
 	name = Krzysztof Jan Pudowski
 	email = krzysiek.pudowski@protonmail.com
-[core]
-	editor = "nvim"
 [init]
 	defaultBranch = main
 [alias]
