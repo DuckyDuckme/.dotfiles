@@ -72,8 +72,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 --vim.cmd('silent! colorscheme OceanicNext')
 vim.cmd('silent! colorscheme catppuccin')
-vim.g.termguicolors=true
-
 
 -- to set the transparent background
 vim.api.nvim_set_hl(0, "Normal", {})
