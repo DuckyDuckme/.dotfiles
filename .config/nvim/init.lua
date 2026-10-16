@@ -44,12 +44,11 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
     -- themes
     Plug('catppuccin/nvim')
-    Plug('morhetz/gruvbox')
-    Plug('catppuccin/nvim')
-    Plug('folke/tokyonight.nvim')
-    Plug('EdenEast/nightfox.nvim')
-    Plug('mhartington/oceanic-next')
-    Plug('arzg/vim-colors-xcode')
+    --Plug('morhetz/gruvbox')
+    --Plug('folke/tokyonight.nvim')
+    --Plug('EdenEast/nightfox.nvim')
+    --Plug('mhartington/oceanic-next')
+    --Plug('arzg/vim-colors-xcode')
     -- tex support
     Plug('lervag/vimtex')
     -- for commenting out
