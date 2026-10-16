@@ -46,8 +46,8 @@ source /home/ducky/.config/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# https://github.com/zdharma-continuum/fast-syntax-highlighting
-#source ~/AUR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+# source the .env file
+[[ -f ~/.config/.env ]] && source ~/.config/.env
 
 # zoxide
 eval "$(zoxide init zsh)"
