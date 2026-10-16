@@ -8,11 +8,13 @@ alias ..='cd ..'
 alias diskspace="du -S | sort -n -r | more"
 alias grep="grep --color=auto"
 alias shut="shutdown now"
+# remote machines rarely have alacritty's terminfo, so pretend to be xterm there
+alias ssh='TERM=xterm-256color ssh'
 
 # rsync version of cp and mv copied from arch wiki
 cpr() {
   rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 "$@"
 }
 mvr() {
-  rsync --archive -hh --partial --info=stats1,progress2 --modify-window=1 --remove-source-files "$@"
+  cpr --remove-source-files "$@"
 }

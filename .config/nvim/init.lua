@@ -13,9 +13,9 @@ vim.opt.scrolloff = 8  -- 'so' option (scroll offset)
 vim.g.maplocalleader = ' '
 vim.g.mapleader = ' '
 
-vim.api.nvim_set_keymap('i', 'kj', '<Esc>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<tab>', ':noh<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '0', '^', { noremap = true, silent = true })
+vim.keymap.set('i', 'kj', '<Esc>')
+vim.keymap.set('n', '<Tab>', '<Cmd>noh<CR>')
+vim.keymap.set('n', '0', '^')
 
 -- associate .sage files with .py
 vim.api.nvim_command('autocmd BufRead,BufNewFile *.sage set filetype=python')
@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     pattern = {"*"},
     callback = function()
         if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
-            vim.api.nvim_exec("normal! g'\"",false)
+            vim.cmd([[normal! g'"]])
         end
     end
 })
@@ -79,7 +79,6 @@ vim.g.vimtex_view_general_viewer = 'okular'
 --vim.g.vimtex_view_method = 'evince'
 --vim.g.vimtex_view_general_options = [[--synctex-forward @line:@col:@file]]
 --vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
-vim.g.tex_flavor = "latex"
 
 -- for ignored warnings
 vim.g.vimtex_quickfix_ignore_filters = {
@@ -89,7 +88,7 @@ vim.g.vimtex_quickfix_ignore_filters = {
 -- latexmk configuration
 vim.g.vimtex_compiler_latexmk = {
     build_dir = "",		  -- PDF in project root
-    aux_dir = "latexmk_build",    -- everything else in build/
+    aux_dir = "latexmk_build",    -- everything else in latexmk_build/
 }
 -------- end of vimtex config -------
 
@@ -99,7 +98,10 @@ vim.g.vimtex_compiler_latexmk = {
 --
 ------------- coc config ----------------
 -- i found this at coc github
-vim.api.nvim_command('autocmd FileType json syntax match Comment +//.*$+')
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'json',
+    command = [[syntax match Comment +//.*$+]],
+})
 vim.opt.updatetime = 300
 vim.opt.signcolumn = "yes"
 

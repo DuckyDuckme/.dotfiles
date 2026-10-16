@@ -5,16 +5,21 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=10000
-SAVEHIST=1000
+SAVEHIST=10000
+
+# taken from stack
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
 setopt autocd extendedglob notify hist_ignore_all_dups
+
 unsetopt beep
 
 bindkey '^R' history-incremental-search-backward
-
-# End of lines configured by zsh-newuser-install
 
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/ducky/.zshrc'
