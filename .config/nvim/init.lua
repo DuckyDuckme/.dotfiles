@@ -1,16 +1,11 @@
-vim.opt.compatible = false  -- It's typically unnecessary as Neovim is already nocompatible
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.shiftwidth = 4
-vim.opt.ruler = true
 vim.opt.showmatch = true
-vim.opt.hlsearch = true
 vim.opt.softtabstop = 4
-vim.opt.mouse = 'a'
 vim.opt.cursorline = true
-vim.opt.ttyfast = true
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.scrolloff = 8  -- 'so' option (scroll offset)
 
