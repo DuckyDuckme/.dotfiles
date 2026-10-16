@@ -1,75 +1,35 @@
-" display line numbers on the left
-set number
-set relativenumber
-set ignorecase
-set smartcase
-set shiftwidth=4
-set ruler
-set encoding=utf8
+" My own vim settings, installed as ~/.vimrc.
+"
+" The basics (line numbers, search, indenting, the kj/Tab/0 mappings) live in
+" .config/system/vimrc.local, which is installed by hand as
+" /etc/vimrc.local and loaded before this file.
 
-" use F11 to toggle between 'paste' and 'nopaste'
-set pastetoggle=<F11>
-
-" keep the same indent as you are on
-set autoindent
-
-" set 7 lines to the cursor - when moving vertically
-set so=7
-
-" highlights the search
-set hlsearch
-
-" :W to write with root permissions
-command! W execute 'w !doas tee % > /dev/null' <bar> edit!
-" or for sudo
-" command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
-
-syntax enable
-
-" enable use of mouse for all modes
-if has('mouse')
-    set mouse=a
+" on machines where it isn't installed system-wide, load it straight from the repo
+if !filereadable('/etc/vimrc.local')
+    silent! source ~/.dotfiles/.config/system/vimrc.systemwide
 endif
 
-" maps 'kj' to escape
-inoremap kj <Esc>
+" :W writes the file with root permissions
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
-" maps <tab> to clear the search pattern
-map <tab> :noh<cr>
-
-" map 0 to first non-blank character
-map 0 ^
-
-" this automates installation of vim-plug
-" let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-" if empty(glob(data_dir . '/autoload/plug.vim'))
-  " silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  " autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-" endif
-
-" if it is installed
-if ! empty(globpath(&rtp, 'autoload/plug.vim'))
-    " start the vim.plug config
+" plugins, only if vim-plug is installed
+if !empty(globpath(&rtp, 'autoload/plug.vim'))
     call plug#begin()
-
-    " sth the Rust website recommended me
-    filetype plugin indent on
-
-    " rust lang support
-    " Plug 'rust-lang/rust.vim'
 
     " gruvbox theme
     Plug 'morhetz/gruvbox'
 
     " tex support
     Plug 'lervag/vimtex'
+
     call plug#end()
 endif
 
-set background=dark
-let g:gruvbox_transparent_bg = 1 " to make background transparent
-autocmd VimEnter * hi Normal ctermbg=none
-silent! colorscheme gruvbox
+" transparent background: clear Normal's background after any colorscheme loads
+augroup transparent_bg
+    autocmd!
+    autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
+augroup END
 
-" that's to set the pdf viewer of latex to zathura
-"let g:vimtex_view_method=‘zathura’
+set background=dark
+silent! colorscheme gruvbox

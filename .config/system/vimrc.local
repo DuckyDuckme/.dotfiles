@@ -1,0 +1,39 @@
+" System-wide vim settings that every user (root included) gets.
+"
+" Install by hand as /etc/vimrc.local. Fedora's /etc/vimrc sources that file
+" at the very end, so the package-owned /etc/vimrc never has to be edited.
+" /etc/vimrc already turns on ruler, showcmd, wildmenu, incsearch, 'filetype
+" plugin on' and jumping back to the last cursor position, so those aren't here.
+
+set number
+set relativenumber
+set ignorecase
+set smartcase
+set shiftwidth=4
+
+" keep the same indent as the line you are on
+set autoindent
+
+" keep 7 lines above/below the cursor when moving vertically
+set scrolloff=7
+
+" Fedora's /etc/vimrc sets these too; kept so this file also works on its own
+syntax on
+set hlsearch
+
+filetype plugin indent on
+
+" enable use of mouse for all modes
+if has('mouse')
+    set mouse=a
+endif
+
+" kj leaves insert mode
+inoremap kj <Esc>
+
+" Tab clears the search highlight. In vim a terminal sends the same key for
+" Tab and Ctrl-I, so this also replaces Ctrl-I (jump forward in the jumplist).
+nnoremap <Tab> :nohlsearch<CR>
+
+" 0 goes to the first non-blank character (also in visual mode and after d, c, y)
+noremap 0 ^
