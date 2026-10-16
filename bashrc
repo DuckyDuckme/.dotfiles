@@ -9,8 +9,8 @@
 [ -f /etc/bashrc ] && . /etc/bashrc
 
 # source the env variables which appends to path and sets some TERMCAP stuff
-if [ -f ~/.config/shell/.env ]; then
-    . ~/.config/shell/.env
+if [ -f ~/.config/shell/env ]; then
+    . ~/.config/shell/env
 fi
 
 export HISTCONTROL=ignoredups:erasedups
@@ -19,8 +19,8 @@ export HISTSIZE=1000000
 export HISTFILESIZE=1000000
 
 # Source the aliases
-if [ -f ~/.config/shell/.aliases ]; then
-    . ~/.config/shell/.aliases
+if [ -f ~/.config/shell/aliases ]; then
+    . ~/.config/shell/aliases
 fi
 
 # Set the prompt
