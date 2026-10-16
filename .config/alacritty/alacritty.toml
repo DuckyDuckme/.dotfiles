@@ -4,74 +4,19 @@ TERM = "xterm-256color"
 [terminal.shell]
 program = "/bin/zsh"
 
+# bold/italic variants inherit the normal family
 [font]
 size = 11.0
+normal = { family = "Source Code Pro" }
+offset = { x = 0, y = 1 }
 
-[font.bold]
-family = "Source Code Pro"
-style = "Bold"
+[window]
+padding = { x = 1, y = 1 }
+dynamic_padding = true
+opacity = 0.95
+decorations = "Buttonless"
 
-[font.bold_italic]
-family = "Source Code Pro"
-style = "Bold Italic"
-
-[font.italic]
-family = "Source Code Pro"
-style = "Italic"
-
-[font.normal]
-family = "Source Code Pro"
-style = "Regular"
-
-[font.offset]
-x = 0
-y = 1
-
-[[keyboard.bindings]]
-action = "Paste"
-key = "V"
-mods = "Control|Shift"
-
-[[keyboard.bindings]]
-action = "Copy"
-key = "C"
-mods = "Control|Shift"
-
-[[keyboard.bindings]]
-action = "PasteSelection"
-key = "Insert"
-mods = "Shift"
-
-[[keyboard.bindings]]
-action = "ResetFontSize"
-key = "Key0"
-mods = "Control"
-
-[[keyboard.bindings]]
-action = "IncreaseFontSize"
-key = "Equals"
-mods = "Control"
-
-[[keyboard.bindings]]
-action = "IncreaseFontSize"
-key = "Plus"
-mods = "Control"
-
-[[keyboard.bindings]]
-action = "DecreaseFontSize"
-key = "Minus"
-mods = "Control"
-
-[[keyboard.bindings]]
-action = "ClearLogNotice"
-key = "L"
-mods = "Control"
-
-[[keyboard.bindings]]
-chars = "\f"
-key = "L"
-mods = "Control"
-
+# scroll with plain PageUp/PageDown (default needs Shift); other bindings are defaults
 [[keyboard.bindings]]
 action = "ScrollPageUp"
 key = "PageUp"
@@ -83,27 +28,3 @@ action = "ScrollPageDown"
 key = "PageDown"
 mode = "~Alt"
 mods = "None"
-
-[[keyboard.bindings]]
-action = "ScrollToTop"
-key = "Home"
-mode = "~Alt"
-mods = "Shift"
-
-[[keyboard.bindings]]
-action = "ScrollToBottom"
-key = "End"
-mode = "~Alt"
-mods = "Shift"
-
-[window]
-padding = { x = 1, y = 1}
-dynamic_padding = true
-opacity = 0.95
-decorations = "Buttonless"
-
-[window.class]
-general = "Alacritty"
-instance = "Alacritty"
-
-[terminal]
