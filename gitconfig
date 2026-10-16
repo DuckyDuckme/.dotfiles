@@ -5,8 +5,6 @@
 	editor = "nvim"
 [init]
 	defaultBranch = main
-[github]
-	user = DuckyDuckme
 [alias]
 	st = status -sb
 	co = checkout
