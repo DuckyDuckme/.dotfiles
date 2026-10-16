@@ -23,18 +23,8 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-# my environment variables
-export EDITOR=vim
-
-
-# For vi insert mode
-#bindkey -v
-#bindkey '^R' history-incremental-search-backward
-
-#bindkey kj vi-cmd-mode
-
 # Add aliases
-source $HOME/.config/.aliases
+[[ -f ~/.config/.aliases ]] && source ~/.config/.aliases
 
 #zstyle ':completion:*' menu select
 # Only complete .tex files for the `nvim` command
@@ -53,16 +43,6 @@ source /home/ducky/.config/powerlevel10k/powerlevel10k.zsh-theme
 eval "$(zoxide init zsh)"
 export _ZO_ECHO=1
 
-# add ~/scripts to path
-path+=("$HOME/scripts/")
-# add the .local/bin directory to path
-path+=("$HOME/.local/bin/")
-# add .cargo/ into the path
-path+=("$HOME/.cargo/bin/")
-export PATH
-
-#export LESS='-R -F -N -X -S -i'
-#export LESS='-F'
 export LESS='--wordwrap -i -F --use-color --mouse --wheel-lines=5 -R'
 
 # Make zsh know about hosts already accessed by SSH
