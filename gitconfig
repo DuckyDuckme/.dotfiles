@@ -5,16 +5,9 @@
 	editor = "nvim"
 [init]
 	defaultBranch = main
-[push]
-	default = matching
-	autoSetupRemote = true
-[pull]
-	#rebase = false
 [color]
 	ui = true
 	status = auto
-[branch]
-	#autosetuprebase = always
 [github]
 	user = DuckyDuckme
 [alias]
