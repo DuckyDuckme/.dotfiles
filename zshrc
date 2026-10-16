@@ -54,11 +54,11 @@ eval "$(zoxide init zsh)"
 export _ZO_ECHO=1
 
 # add ~/scripts to path
-path+=('$HOME/scripts/')
+path+=("$HOME/scripts/")
 # add the .local/bin directory to path
-path+=('$HOME/.local/bin/')
+path+=("$HOME/.local/bin/")
 # add .cargo/ into the path
-path+=('$HOME/.cargo/bin/')
+path+=("$HOME/.cargo/bin/")
 export PATH
 
 #export LESS='-R -F -N -X -S -i'
