@@ -1,3 +1,6 @@
+# first of, include the systemwide settings
+$include /etc/inputrc
+
 # This file controls the behaviour of line input editing for
 # programs that use the GNU Readline library.
 
