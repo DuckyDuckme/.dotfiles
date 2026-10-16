@@ -25,7 +25,7 @@ if [ -f ~/.config/.aliases ]; then
 fi
 
 # Set the prompt
-PS1="\[\e[1;32m\]$? \u@\h \W \$\[\e[m\] "
+PS1='\[\e[1;32m\]$? \u@\h \W \$\[\e[m\] '
 
 # Prepend any path with cd
 shopt -s autocd
