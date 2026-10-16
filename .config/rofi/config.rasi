@@ -1,5 +1,5 @@
 configuration {
-	modes: "combi,filebrowser,ssh,calc";
+	modes: "combi,filebrowser,ssh";
 	show-icons: true;
 	terminal: "alacritty";
 	drun-show-actions: true;
