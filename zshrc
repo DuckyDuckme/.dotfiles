@@ -29,7 +29,7 @@ compinit
 # End of lines added by compinstall
 
 # Add aliases
-[[ -f ~/.config/.aliases ]] && source ~/.config/.aliases
+[[ -f ~/.config/shell/.aliases ]] && source ~/.config/shell/.aliases
 
 #zstyle ':completion:*' menu select
 # Only complete .tex files for the `nvim` command
@@ -42,7 +42,7 @@ source /home/ducky/.config/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # source the .env file
-[[ -f ~/.config/.env ]] && source ~/.config/.env
+[[ -f ~/.config/shell/.env ]] && source ~/.config/shell/.env
 
 # zoxide
 eval "$(zoxide init zsh)"
