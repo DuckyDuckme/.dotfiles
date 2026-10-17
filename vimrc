@@ -6,7 +6,7 @@
 
 " on machines where it isn't installed system-wide, load it straight from the repo
 if !filereadable('/etc/vimrc.local')
-    silent! source ~/.dotfiles/.config/system/vimrc.systemwide
+    silent! source ~/.dotfiles/.config/system/vimrc.local
 endif
 
 " :W writes the file with root permissions

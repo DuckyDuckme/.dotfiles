@@ -64,21 +64,21 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     vim.call('plug#end')	
 --end
 
---vim.cmd('silent! colorscheme OceanicNext')
+-- vim.cmd('silent! colorscheme OceanicNext')
+require('catppuccin').setup({ transparent_background = true })
 vim.cmd('silent! colorscheme catppuccin')
-
 -- to set the transparent background
-vim.api.nvim_set_hl(0, "Normal", {})
-vim.api.nvim_set_hl(0, "LineNr", {})
-vim.api.nvim_set_hl(0, "SignColumn", {})
-vim.api.nvim_set_hl(0, "EndOfBuffer", {})
+-- vim.api.nvim_set_hl(0, "Normal", {})
+-- vim.api.nvim_set_hl(0, "LineNr", {})
+-- vim.api.nvim_set_hl(0, "SignColumn", {})
+-- vim.api.nvim_set_hl(0, "EndOfBuffer", {})
 
 
 ----------- vimtex config ----------
 vim.g.vimtex_view_general_viewer = 'okular'
 --vim.g.vimtex_view_method = 'evince'
---vim.g.vimtex_view_general_options = [[--synctex-forward @line:@col:@file]]
---vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
+vim.g.vimtex_view_general_options = [[--synctex-forward @line:@col:@file]]
+vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
 
 -- for ignored warnings
 vim.g.vimtex_quickfix_ignore_filters = {
