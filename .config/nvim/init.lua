@@ -8,6 +8,13 @@ vim.opt.softtabstop = 4
 vim.opt.cursorline = true
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.scrolloff = 8  -- 'so' option (scroll offset)
+vim.opt.undofile = true     -- undo history survives closing the file
+vim.opt.expandtab = true    -- Tab inserts spaces, so no mixed tabs/spaces
+vim.opt.splitright = true   -- :vsplit opens to the right
+vim.opt.splitbelow = true   -- :split opens below
+vim.opt.breakindent = true  -- wrapped lines keep their indentation
+vim.opt.linebreak = true    -- wrap at word boundaries, not mid-word
+vim.opt.confirm = true      -- :q on an unsaved buffer asks instead of erroring
 
 -- maps the (local)leader (usually the backslash \) to be just the spacebar
 vim.g.maplocalleader = ' '
@@ -19,6 +26,22 @@ vim.keymap.set('n', '0', '^')
 
 -- associate .sage files with .py
 vim.api.nvim_command('autocmd BufRead,BufNewFile *.sage set filetype=python')
+
+-- spellcheck prose (]s / [s jump, z= suggests, zg adds a word); hide LaTeX markup in tex
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'tex', 'gitcommit', 'markdown' },
+    callback = function()
+        vim.opt_local.spell = true
+        if vim.bo.filetype == 'tex' then
+            vim.opt_local.conceallevel = 2
+        end
+    end,
+})
+
+-- briefly highlight yanked text
+vim.api.nvim_create_autocmd('TextYankPost', {
+    callback = function() vim.hl.on_yank() end,
+})
 
 ---- a little sth from stackoverflow to open the file at last position --
 vim.api.nvim_create_autocmd("BufReadPost", {
