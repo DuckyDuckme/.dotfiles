@@ -24,9 +24,11 @@ vim.keymap.set('i', 'kj', '<Esc>')
 vim.keymap.set('n', '<Tab>', '<Cmd>noh<CR>')
 vim.keymap.set('n', '0', '^')
 
--- associate .sage files with .py
-vim.api.nvim_command('autocmd BufRead,BufNewFile *.sage set filetype=python')
+-- associate .sage files with .py -- unnecessary if using tree-sitter
+-- vim.api.nvim_command('autocmd BufRead,BufNewFile *.sage set filetype=python')
 
+
+-- got this from Claude, not sure what it does lol
 -- spellcheck prose (]s / [s jump, z= suggests, zg adds a word); hide LaTeX markup in tex
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'tex', 'gitcommit', 'markdown' },
@@ -67,12 +69,12 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     --Plug('EdenEast/nightfox.nvim')
     --Plug('mhartington/oceanic-next')
     --Plug('arzg/vim-colors-xcode')
+    
     -- tex support
     Plug('lervag/vimtex')
-    -- for commenting out
-    --Plug('preservim/nerdcommenter')
     -- for code completion
-    Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
+    Plug('saghen/blink.cmp', { ['tag'] = 'v1.*' })
+
     -- linting
     --Plug('dense-analysis/ale')
 
@@ -115,44 +117,53 @@ vim.g.vimtex_compiler_latexmk = {
 }
 -------- end of vimtex config -------
 
-    
----[=====[
---begin comment block
---
-------------- coc config ----------------
--- i found this at coc github
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'json',
-    command = [[syntax match Comment +//.*$+]],
+----------- lsp config --------------
+vim.lsp.config('texlab', {
+    -- change this to correct path
+    cmd = { vim.fn.expand('~/programming/builds/lsp/texlab/target/release/texlab') },
+    filetypes = { 'tex', 'plaintex', 'bib' },
+    root_markers = { '.latexmkrc', '.git' },
 })
-vim.opt.updatetime = 300
-vim.opt.signcolumn = "yes"
 
-local keyset = vim.keymap.set
--- Autocomplete
-function _G.check_back_space()
-    local col = vim.fn.col('.') - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+vim.lsp.config('sagelsp', {
+  cmd = { vim.fn.expand('~/.local/share/mamba/envs/sage/bin/sagelsp') },
+  filetypes = { 'sage' },
+})
+
+vim.lsp.enable({'sagelsp', 'texlab'})
+
+----------- end of lsp config ---------
+
+----------- blink.cmp config ----------
+local ok, blink = pcall(require, 'blink.cmp')
+if ok then
+    blink.setup({
+        keymap = {
+            preset = 'enter',  -- Enter accepts, C-space opens, C-e closes
+            ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
+            ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
+        },
+        completion = { list = { selection = { preselect = false } } },
+        sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
+    })
 end
+----------- end of blink.cmp config ----
 
--- Use Tab for trigger completion with characters ahead and navigate
--- NOTE: There's always a completion item selected by default, you may want to enable
--- no select by setting `"suggest.noselect": true` in your configuration file
--- NOTE: Use command ':verbose imap <tab>' to make sure Tab is not mapped by
--- other plugins before putting this into your config
-local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
-keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
-keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
+----------- treesitter config ----------
+local ts_ok, ts = pcall(require, 'nvim-treesitter')
+if ts_ok then
+    -- parsers are compiled on first install (needs tree-sitter CLI and gcc)
+    ts.install({ 'bash', 'toml', 'yaml', 'python', 'rust' })
 
--- Make <CR> to accept selected completion item or notify coc.nvim to format
--- <C-g>u breaks current undo, please make your own choice
-keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
+    vim.api.nvim_create_autocmd('FileType', {
+        pattern = { 'sh', 'bash', 'toml', 'yaml', 'python', 'rust' },
+        callback = function() vim.treesitter.start() end,
+    })
 
---
--- end of a comment block
----]=====]
-
-
+    -- .sage files use the python parser
+    vim.treesitter.language.register('python', 'sage')
+end
+------------ end of treesitter config ---
 
 ----------- telescope config ----------
 require("telescope").setup()
