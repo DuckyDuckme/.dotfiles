@@ -19,7 +19,15 @@ setopt autocd extendedglob notify hist_ignore_all_dups
 
 unsetopt beep
 
-bindkey '^R' history-incremental-search-backward
+bindkey -v # to set vim keybindings
+
+# puts a huge fzf script into zsh
+source <(fzf --zsh)
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+# to pick files fuzzily and paste them into the command line
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# sets Ctrl-R to fuzzy search through history
+export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/ducky/.zshrc'
