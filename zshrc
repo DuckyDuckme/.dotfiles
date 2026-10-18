@@ -29,6 +29,10 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # sets Ctrl-R to fuzzy search through history
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# source two plugins
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh   # must be the last line
+
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/ducky/.zshrc'
 
@@ -39,7 +43,9 @@ compinit
 # Add aliases
 [[ -f ~/.config/shell/aliases ]] && source ~/.config/shell/aliases
 
-#zstyle ':completion:*' menu select
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'      # case-insensitive: cd dow<TAB> → Downloads
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}       # colored file completion
 # Only complete .tex files for the `nvim` command
 zstyle ':completion:*:*:nvim:*' file-patterns '*.tex:tex-files' '%p:all-files'
 
