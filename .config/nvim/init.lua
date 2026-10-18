@@ -159,7 +159,7 @@ vim.api.nvim_create_autocmd('FileType', {
     -- treesitter would try to install it but no such thing exists
     -- so we need to unpack the langs array (equivallent of *[a,b,c] 
     -- in python
-    pattern = { 'sage', unpack(langs) }
+    pattern = { 'sage', unpack(langs) },
     callback = function() vim.treesitter.start() end,
 })
 vim.treesitter.language.register('python', 'sage')
