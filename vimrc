@@ -32,4 +32,4 @@ augroup transparent_bg
 augroup END
 
 set background=dark
-silent! colorscheme gruvbox
+silent! colorscheme habamax

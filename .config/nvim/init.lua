@@ -25,7 +25,7 @@ vim.keymap.set('n', '<Tab>', '<Cmd>noh<CR>')
 vim.keymap.set('n', '0', '^')
 
 -- associate .sage files with .py -- unnecessary if using tree-sitter
--- vim.api.nvim_command('autocmd BufRead,BufNewFile *.sage set filetype=python')
+--vim.api.nvim_command('autocmd BufRead,BufNewFile *.sage set filetype=python')
 
 
 -- got this from Claude, not sure what it does lol
@@ -35,6 +35,7 @@ vim.api.nvim_create_autocmd('FileType', {
     callback = function()
         vim.opt_local.spell = true
         if vim.bo.filetype == 'tex' then
+            -- this makes \alpha display as an actual alpha, not sure if i like this
             vim.opt_local.conceallevel = 2
         end
     end,
@@ -126,7 +127,7 @@ vim.lsp.config('texlab', {
 })
 
 vim.lsp.config('sagelsp', {
-  cmd = { vim.fn.expand('~/.local/share/mamba/envs/sage/bin/sagelsp') },
+  cmd = { vim.fn.expand('~/.local/share/mamba/envs/sage-dev/bin/sagelsp') },
   filetypes = { 'sage' },
 })
 
@@ -150,19 +151,31 @@ end
 ----------- end of blink.cmp config ----
 
 ----------- treesitter config ----------
-local ts_ok, ts = pcall(require, 'nvim-treesitter')
-if ts_ok then
-    -- parsers are compiled on first install (needs tree-sitter CLI and gcc)
-    ts.install({ 'bash', 'toml', 'yaml', 'python', 'rust' })
+local langs = { 'rust', 'python' }
+require('nvim-treesitter').install(langs)
 
-    vim.api.nvim_create_autocmd('FileType', {
-        pattern = { 'sh', 'bash', 'toml', 'yaml', 'python', 'rust' },
-        callback = function() vim.treesitter.start() end,
-    })
-
-    -- .sage files use the python parser
-    vim.treesitter.language.register('python', 'sage')
-end
+vim.api.nvim_create_autocmd('FileType', {
+    -- we can't put sage in langs because then 
+    -- treesitter would try to install it but no such thing exists
+    -- so we need to unpack the langs array (equivallent of *[a,b,c] 
+    -- in python
+    pattern = { 'sage', unpack(langs) }
+    callback = function() vim.treesitter.start() end,
+})
+vim.treesitter.language.register('python', 'sage')
+-- local ts_ok, ts = pcall(require, 'nvim-treesitter')
+-- if ts_ok then
+--     -- parsers are compiled on first install (needs tree-sitter CLI and gcc)
+--     ts.install({ 'bash', 'toml', 'yaml', 'python', 'rust' })
+--
+--     vim.api.nvim_create_autocmd('FileType', {
+--         pattern = { 'sh', 'bash', 'toml', 'yaml', 'python', 'rust' },
+--         callback = function() vim.treesitter.start() end,
+--     })
+--
+--     -- .sage files use the python parser
+--     vim.treesitter.language.register('python', 'sage')
+-- end
 ------------ end of treesitter config ---
 
 ----------- telescope config ----------
