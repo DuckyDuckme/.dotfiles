@@ -1,9 +1,21 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
-# taken from ~~stack~~ Claude
-setopt SHARE_HISTORY EXTENDED_HISTORY HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS
+# taken from stack
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt autocd extendedglob notify hist_ignore_all_dups
 
 unsetopt beep
 
@@ -37,14 +49,17 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}       # colored file compl
 # Only complete .tex files for the `nvim` command
 zstyle ':completion:*:*:nvim:*' file-patterns '*.tex:tex-files' '%p:all-files'
 
+source /home/ducky/.local/share/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.config/shell/p10k.zsh ]] || source ~/.config/shell/p10k.zsh
+
 # source the .env file
 [[ -f ~/.config/shell/env ]] && source ~/.config/shell/env
 
 # zoxide
 eval "$(zoxide init zsh)"
 export _ZO_ECHO=1
-
-export LESS='--wordwrap -i -F --use-color --mouse --wheel-lines=5 -R'
 
 # Make zsh know about hosts already accessed by SSH
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
