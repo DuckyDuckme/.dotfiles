@@ -25,7 +25,7 @@ bindkey -v # to set vim keybindings
 source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 # to pick files fuzzily and paste them into the command line
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_SHIFT_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # sets Ctrl-R to fuzzy search through history
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 
