@@ -7,7 +7,7 @@ vim.opt.showmatch = true
 vim.opt.softtabstop = 4
 vim.opt.cursorline = true
 vim.opt.clipboard = 'unnamedplus'
-vim.opt.scrolloff = 8  -- 'so' option (scroll offset)
+vim.opt.scrolloff = 8       -- 'so' option (scroll offset)
 vim.opt.undofile = true     -- undo history survives closing the file
 vim.opt.expandtab = true    -- Tab inserts spaces, so no mixed tabs/spaces
 vim.opt.splitright = true   -- :vsplit opens to the right
@@ -15,6 +15,8 @@ vim.opt.splitbelow = true   -- :split opens below
 vim.opt.breakindent = true  -- wrapped lines keep their indentation
 vim.opt.linebreak = true    -- wrap at word boundaries, not mid-word
 vim.opt.confirm = true      -- :q on an unsaved buffer asks instead of erroring
+
+vim.opt.backupcopy = "yes"   -- otherwise editing target of a hard link removes the link
 
 -- maps the (local)leader (usually the backslash \) to be just the spacebar
 vim.g.maplocalleader = ' '
@@ -24,20 +26,16 @@ vim.keymap.set('i', 'kj', '<Esc>')
 vim.keymap.set('n', '<Tab>', '<Cmd>noh<CR>')
 vim.keymap.set('n', '0', '^')
 
--- associate .sage files with .py -- unnecessary if using tree-sitter
---vim.api.nvim_command('autocmd BufRead,BufNewFile *.sage set filetype=python')
-
-
 -- got this from Claude, not sure what it does lol
 -- spellcheck prose (]s / [s jump, z= suggests, zg adds a word); hide LaTeX markup in tex
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'tex', 'gitcommit', 'markdown' },
     callback = function()
         vim.opt_local.spell = true
-        if vim.bo.filetype == 'tex' then
-            -- this makes \alpha display as an actual alpha, not sure if i like this
-            vim.opt_local.conceallevel = 2
-        end
+        -- if vim.bo.filetype == 'tex' then
+        --     -- this makes \alpha display as an actual alpha, not sure if i like this
+        --     vim.opt_local.conceallevel = 2
+        -- end
     end,
 })
 
@@ -65,11 +63,11 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
     -- themes
     Plug('catppuccin/nvim')
-    --Plug('morhetz/gruvbox')
-    --Plug('folke/tokyonight.nvim')
-    --Plug('EdenEast/nightfox.nvim')
-    --Plug('mhartington/oceanic-next')
-    --Plug('arzg/vim-colors-xcode')
+    Plug('morhetz/gruvbox')
+    Plug('folke/tokyonight.nvim')
+    Plug('EdenEast/nightfox.nvim')
+    Plug('mhartington/oceanic-next')
+    Plug('arzg/vim-colors-xcode')
     
     -- tex support
     Plug('lervag/vimtex')
@@ -87,17 +85,21 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     Plug('nvim-treesitter/nvim-treesitter')
     Plug('nvim-tree/nvim-web-devicons')
 
+    -- mini.statusline
+    Plug('nvim-mini/mini.nvim')
+
     vim.call('plug#end')	
 --end
 
--- vim.cmd('silent! colorscheme OceanicNext')
+----- colorschemes -----
 require('catppuccin').setup({ transparent_background = true })
 vim.cmd('silent! colorscheme catppuccin')
--- to set the transparent background
--- vim.api.nvim_set_hl(0, "Normal", {})
--- vim.api.nvim_set_hl(0, "LineNr", {})
--- vim.api.nvim_set_hl(0, "SignColumn", {})
--- vim.api.nvim_set_hl(0, "EndOfBuffer", {})
+
+-- require('tokyonight').setup({
+--     transparent = true,
+--     style = "moon"
+-- })
+-- vim.cmd('silent! colorscheme tokyonight')
 
 
 ----------- vimtex config ----------
@@ -186,3 +188,10 @@ vim.keymap.set("n", "<leader>ff", builtin.find_files)
 vim.keymap.set("n", "<leader>fg", builtin.live_grep)
 vim.keymap.set("n", "<leader>fb", builtin.buffers)
 vim.keymap.set("n", "<leader>fh", builtin.help_tags)
+
+----------- statusline ----------------
+vim.o.laststatus = 3
+require('mini.statusline').setup({
+    use_icons = true,
+})
+require('mini.diff').setup()
