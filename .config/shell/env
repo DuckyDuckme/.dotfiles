@@ -36,4 +36,5 @@ export _ZO_ECHO=1
 # for hermes to use podman
 export HERMES_DOCKER_BINARY=/usr/bin/podman
 
-export CLAUDE_CONFIG_DIR=~/.claude
+# my preciousssss
+export MISTRAL_API_KEY=mstrl_s52Onvp9SrIZYPkpwPv5g2BsynCNHol0_4sDPGH
