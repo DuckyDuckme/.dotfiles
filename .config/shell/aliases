@@ -1,9 +1,9 @@
 # Set some aliases
 alias reboot='sudo reboot'
 alias pac='sudo pacman -Syu'
+alias ls='LC_COLLATE=C ls --color=auto'
 alias ll='ls -l'
-alias la='ls -lAh'
-alias ls='ls --color=auto'
+alias la='ls -lAHh --color=auto'
 alias ..='cd ..'
 alias diskspace="du -S | sort -n -r | more"
 alias grep="grep --color=auto"
