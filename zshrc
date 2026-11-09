@@ -5,6 +5,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# source the .env file
+[[ -f ~/.config/shell/env ]] && source ~/.config/shell/env
+
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
@@ -27,14 +30,14 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 # to pick files fuzzily and paste them into the command line
 export FZF_CTRL_SHIFT_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # sets Ctrl-R to fuzzy search through history
-export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+# export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # source two plugins
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 #source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh   # must be the last line
 
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/ducky/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit
@@ -49,13 +52,10 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}       # colored file compl
 # Only complete .tex files for the `nvim` command
 zstyle ':completion:*:*:nvim:*' file-patterns '*.tex:tex-files' '%p:all-files'
 
-source /home/ducky/.local/share/powerlevel10k/powerlevel10k.zsh-theme
+source "$HOME/.local/share/powerlevel10k/powerlevel10k.zsh-theme"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.config/shell/p10k.zsh ]] || source ~/.config/shell/p10k.zsh
-
-# source the .env file
-[[ -f ~/.config/shell/env ]] && source ~/.config/shell/env
 
 # zoxide
 eval "$(zoxide init zsh)"
