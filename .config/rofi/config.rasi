@@ -4,10 +4,10 @@ configuration {
 	terminal: "alacritty";
 	drun-show-actions: true;
 	// sort: true;
-	sorting-method: "fzf";
+	// sorting-method: "fzf";
 	case-smart: true;
 	combi-modes: "drun,run";
-	matching: "fuzzy";
+	// matching: "fuzzy";
   timeout {
       delay:  15;
       action: "kb-cancel";
