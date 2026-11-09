@@ -3,7 +3,7 @@ configuration {
 	show-icons: true;
 	terminal: "alacritty";
 	drun-show-actions: true;
-	sort: true;
+	// sort: true;
 	sorting-method: "fzf";
 	case-smart: true;
 	combi-modes: "drun,run";
